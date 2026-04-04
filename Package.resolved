@@ -1,0 +1,60 @@
+{
+  "originHash" : "7a54d3aa6e10d65b714ef94589414c2d313b79e6ba8fbfb7c3d631264d8ce88a",
+  "pins" : [
+    {
+      "identity" : "collectionkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/CollectionKit",
+      "state" : {
+        "revision" : "bf431cf67cee8eb42599192c712780ed2d7477b1",
+        "version" : "1.1.1"
+      }
+    },
+    {
+      "identity" : "markin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/Markin.git",
+      "state" : {
+        "revision" : "8b3e92d720da421c214e2760ed0735d3502be2dc",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "626b5b7b2f45e1b0b1c6f4a309296d1d21d7311b",
+        "version" : "1.7.1"
+      }
+    },
+    {
+      "identity" : "systemkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/SystemKit",
+      "state" : {
+        "revision" : "fa330043161e8bef00a4b447077498fb3569792a",
+        "version" : "1.8.1"
+      }
+    },
+    {
+      "identity" : "templatekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/TemplateKit",
+      "state" : {
+        "revision" : "3b3adc703cccef854a19cc0210855964a6ee3b5f",
+        "version" : "0.7.3"
+      }
+    },
+    {
+      "identity" : "texttoolbox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apparata/TextToolbox",
+      "state" : {
+        "revision" : "35a2ca5ded2321956649ef6170343089ed640e8b",
+        "version" : "1.4.0"
+      }
+    }
+  ],
+  "version" : 3
+}
