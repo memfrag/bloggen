@@ -9,6 +9,6 @@ public func buildBlog(at blogPath: Path, config configData: Data, verbose: Bool)
     try blog.generatePosts()
 }
 
-func parseConfigData(_ data: Data) throws -> BlogConfig {
+public func parseConfigData(_ data: Data) throws -> BlogConfig {
     return try JSONDecoder().decode(BlogConfig.self, from: data)
 }

@@ -4,22 +4,22 @@ import SystemKit
 
 public class BlogPost {
     
-    let date: Date
-    let dateText: String
+    public let date: Date
+    public let dateText: String
 
-    let title: String
-    
-    let preamble: String
-    
-    let relativeURL: String
-    
-    let toc: String
-    
-    let html: String
-    
-    let images: [Path]
-    
-    init(date: Date, title: String, preamble: String, toc: String, html: String, images: [Path]) {
+    public let title: String
+
+    public let preamble: String
+
+    public let relativeURL: String
+
+    public let toc: String
+
+    public let html: String
+
+    public let images: [Path]
+
+    public init(date: Date, title: String, preamble: String, toc: String, html: String, images: [Path]) {
         self.date = date
         self.title = title
         self.preamble = preamble

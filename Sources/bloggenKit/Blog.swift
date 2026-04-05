@@ -5,8 +5,8 @@ import TextToolbox
 import CollectionKit
 import Markin
 
-class Blog {
-    
+public class Blog {
+
     private let config: BlogConfig
     private let path: Path
     private let blogRenderer: BlogRenderer
@@ -18,13 +18,13 @@ class Blog {
         return formatter
     }()
     
-    init(config: BlogConfig, path: Path) {
+    public init(config: BlogConfig, path: Path) {
         self.config = config
         self.path = path
         blogRenderer = BlogRenderer(config: config, path: path)
     }
     
-    func generatePosts() throws {
+    public func generatePosts() throws {
         
         let postsPath = path.appendingComponent(config.posts)
         guard postsPath.exists, postsPath.isDirectory else {
@@ -75,7 +75,7 @@ class Blog {
         return posts
     }
     
-    private func makeBlogPost(from markdown: String, date: Date, imagesPath: Path) throws -> BlogPost {
+    public func makeBlogPost(from markdown: String, date: Date, imagesPath: Path) throws -> BlogPost {
         
         print(markdown)
         

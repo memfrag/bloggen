@@ -3,15 +3,15 @@ import Foundation
 import TemplateKit
 import SystemKit
 
-class BlogRenderer {
-    
+public class BlogRenderer {
+
     let config: BlogConfig
     let blogPath: Path
     let outputPath: Path
     let outputPostsPath: Path
     let templatesPath: Path
-    
-    init(config: BlogConfig, path: Path) {
+
+    public init(config: BlogConfig, path: Path) {
         self.config = config
         blogPath = path
         outputPath = Path(config.output)
@@ -19,6 +19,13 @@ class BlogRenderer {
         templatesPath = blogPath.appendingComponent("templates")
     }
  
+    public func renderPost(_ post: BlogPost) throws -> String {
+        let postTemplatePath = templatesPath.appendingComponent(config.templates.post.template)
+        let postTemplate = Template(try String(contentsOf: postTemplatePath.url, encoding: .utf8), tagStart: "{{", tagEnd: "}}")
+        let postContext: [String: Any?] = ["post": post]
+        return try postTemplate.render(context: postContext)
+    }
+
     func render(posts: [BlogPost]) throws {
         
         let blogContext = [
