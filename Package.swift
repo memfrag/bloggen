@@ -12,12 +12,12 @@ let package = Package(
         .library(name: "bloggenKit", targets: ["bloggenKit"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.7.1"),
-        .package(url: "https://github.com/apparata/SystemKit", from: "1.8.1"),
-        .package(url: "https://github.com/apparata/CollectionKit", from: "1.1.1"),
-        .package(url: "https://github.com/apparata/TemplateKit", from: "0.7.3"),
-        .package(url: "https://github.com/apparata/TextToolbox", from: "1.4.0"),
-        .package(url: "https://github.com/apparata/Markin.git", from: "1.0.1"),
+        .package(url: "https://github.com/apple/swift-argument-parser", exact: "1.7.1"),
+        .package(url: "https://github.com/apparata/SystemKit", exact: "1.8.1"),
+        .package(url: "https://github.com/apparata/CollectionKit", exact: "1.1.1"),
+        .package(url: "https://github.com/apparata/TemplateKit", exact: "0.7.3"),
+        .package(url: "https://github.com/apparata/TextToolbox", exact: "1.4.0"),
+        .package(url: "https://github.com/apparata/Markin.git", exact: "1.0.2"),
     ],
     targets: [
         .executableTarget(name: "bloggen", dependencies: [

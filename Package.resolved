@@ -1,5 +1,5 @@
 {
-  "originHash" : "7a54d3aa6e10d65b714ef94589414c2d313b79e6ba8fbfb7c3d631264d8ce88a",
+  "originHash" : "00381adc41f6b26441cbf72e9ca21d04bb432a439166d1ff5c2480f60ca7a3e0",
   "pins" : [
     {
       "identity" : "collectionkit",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apparata/Markin.git",
       "state" : {
-        "revision" : "8b3e92d720da421c214e2760ed0735d3502be2dc",
-        "version" : "1.0.1"
+        "revision" : "338699cd72ff2d845356f150c59e82bdca15bacc",
+        "version" : "1.0.2"
       }
     },
     {
