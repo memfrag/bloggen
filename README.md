@@ -38,10 +38,14 @@ my-blog/
     post.html
   posts/
     2024-01-15/
-      my-first-post.md
-      photo.jpg
+      0/
+        my-first-post.md
+        photo.jpg
+      1/
+        a-second-post.md
     2024-03-22/
-      another-post.md
+      0/
+        another-post.md
 ```
 
 ## blogfile.json
@@ -78,9 +82,11 @@ The config file defines where posts live, where to write output, and which templ
 
 ## Writing Posts
 
-Posts are written in [Markin](https://github.com/apparata/Markin) format, a Markdown-like syntax. Each post is a `.md` file inside a date-named directory under `posts/`. The directory name must follow the `yyyy-MM-dd` format (e.g. `2024-01-15`).
+Posts are written in [Markin](https://github.com/apparata/Markin) format, a Markdown-like syntax. Each post lives in its own numbered subdirectory inside a date-named directory under `posts/`. The date directory name must follow the `yyyy-MM-dd` format (e.g. `2024-01-15`), and each post directory inside it is named with an integer index starting at `0`.
 
-You can place multiple posts in the same date directory and include images alongside the markdown files. Local images referenced in a post are automatically copied to the output directory.
+The numbered directory holds exactly one `.md` file along with any images that post references. Local images referenced in a post are automatically copied to the output directory.
+
+Within a single day, posts are ordered by their index (lower index = earlier post). Use `0/`, `1/`, `2/`, etc. to control the order — there is no time-of-day component in the date directory.
 
 ### Post structure
 
@@ -160,10 +166,11 @@ The post template receives a single `post` object.
 |----------|-------------|
 | `title` | Post title (from the first H1 header) |
 | `dateText` | Formatted date string (e.g. "Jan 15, 2024") |
+| `index` | Integer index of the post within its date (from the numbered source directory) |
 | `preamble` | Summary text (from the first paragraph) |
 | `html` | Rendered HTML body (without the title and preamble) |
 | `toc` | Generated table of contents HTML with anchor links |
-| `relativeURL` | Relative path to the post (e.g. `posts/2024-01-15/my-post-title.html`) |
+| `relativeURL` | Relative path to the post (e.g. `posts/2024-01-15/0/my-post-title.html`) |
 
 ### Template syntax
 
@@ -187,10 +194,14 @@ output/
   index.html              # Blog index page
   posts/
     2024-01-15/
-      my-post-title.html   # Individual post
-      photo.jpg             # Copied images
+      0/
+        my-post-title.html  # Individual post
+        photo.jpg            # Copied images
+      1/
+        a-second-post.html
     2024-03-22/
-      another-post.html
+      0/
+        another-post.html
 ```
 
 Post URLs are generated from the date and a URL-safe version of the title (lowercased, non-alphanumeric characters replaced with hyphens).

@@ -55,27 +55,43 @@ public class Blog {
     }
     
     private func loadPostsForDay(at postsPath: Path, day: String, dayPath: Path) throws -> [BlogPost] {
-        
+
         guard let date = stringToDateFormatter.date(from: day) else {
             throw BlogError.invalidDateFormat
         }
-        
-        let markdownFiles = try (postsPath + dayPath).contentsOfDirectory()
-            .filter { $0.extension == "md" }
-        
+
+        let indexRegex = Regex("^\\d+$")
+        let indexedDirectories = try (postsPath + dayPath).contentsOfDirectory()
+            .compactMap { entry -> (Int, Path)? in
+                guard indexRegex.isMatch(entry.lastComponent),
+                      let index = Int(entry.lastComponent) else {
+                    return nil
+                }
+                return (index, entry)
+            }
+            .sorted { $0.0 < $1.0 }
+
         var posts: [BlogPost] = []
-        
-        for markdownFile in markdownFiles {
-            let markdownPath = postsPath + dayPath + markdownFile
+
+        for (index, indexedDir) in indexedDirectories {
+            let postDirectory = postsPath + dayPath + indexedDir
+            let markdownFiles = try postDirectory.contentsOfDirectory()
+                .filter { $0.extension == "md" }
+
+            guard let markdownFile = markdownFiles.first else {
+                continue
+            }
+
+            let markdownPath = postDirectory + markdownFile
             let markdown = try String(contentsOf: markdownPath.url, encoding: .utf8)
-            let blogPost = try makeBlogPost(from: markdown, date: date, imagesPath: postsPath + dayPath)
+            let blogPost = try makeBlogPost(from: markdown, date: date, index: index, imagesPath: postDirectory)
             posts.append(blogPost)
         }
-        
+
         return posts
     }
-    
-    public func makeBlogPost(from markdown: String, date: Date, imagesPath: Path) throws -> BlogPost {
+
+    public func makeBlogPost(from markdown: String, date: Date, index: Int, imagesPath: Path) throws -> BlogPost {
         
         print(markdown)
         
@@ -114,7 +130,7 @@ public class Blog {
                 imagesPath + Path($0.path)
             }
         
-        let post = BlogPost(date: date, title: title, preamble: preamble, toc: toc, html: html, images: images)
+        let post = BlogPost(date: date, index: index, title: title, preamble: preamble, toc: toc, html: html, images: images)
         
         return post
     }

@@ -22,9 +22,9 @@ Two targets:
 - **bloggen** — CLI entry point (`Sources/bloggen/BloggenCommand.swift`). Uses swift-argument-parser with `@main`. Loads `blogfile.json`, delegates to `bloggenKit.buildBlog()`.
 - **bloggenKit** — Library with all logic:
   - `BlogConfig` — Codable config model parsed from `blogfile.json`. Defines posts directory, output directory, and template paths for blog index and individual posts.
-  - `Blog` — Loads posts from date-named directories (e.g. `2024-01-15/`), parses `.md` files with Markin, extracts title (first H1), preamble (first paragraph), TOC, images, and body HTML.
+  - `Blog` — Loads posts from date-named directories (e.g. `2024-01-15/`), each containing numbered subdirectories (`0/`, `1/`, ...) — one per post — with a `.md` file and any referenced images. Parses the markdown with Markin, extracts title (first H1), preamble (first paragraph), TOC, images, and body HTML. Within a date, posts are ordered by their numeric index.
   - `BlogRenderer` — Renders posts using TemplateKit templates, writes HTML output and copies local images. Blog index template receives a `posts` array; post template receives a single `post` object. Properties resolved via `Mirror` reflection.
-  - `BlogPost` — Post model with properties: `title`, `dateText`, `preamble`, `html`, `toc`, `relativeURL`, `images`. Generates URL-safe relative paths from date + title.
+  - `BlogPost` — Post model with properties: `title`, `dateText`, `index`, `preamble`, `html`, `toc`, `relativeURL`, `images`. Generates URL-safe relative paths of the form `posts/<date>/<index>/<title-slug>.html`. Sort order is (date, index) ascending; the post list is reversed before rendering so the newest entries appear first.
 
 ## Key Dependencies
 
