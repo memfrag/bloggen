@@ -79,6 +79,7 @@ The config file defines where posts live, where to write output, and which templ
 | `templates.blog.type` | File extension for the index page (e.g. `"html"`) |
 | `templates.post.template` | Filename of the individual post template |
 | `templates.post.type` | File extension for individual post pages |
+| `url` | Optional. URL of the published blog. Not used by bloggen itself — exposed on `BlogConfig.url` for clients of `bloggenKit`. |
 
 ## Writing Posts
 

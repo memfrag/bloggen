@@ -26,6 +26,11 @@ public struct BlogConfig {
     public let posts: String
     public let templates: Templates
     public let output: String
+
+    /// Optional URL where the blog is published. bloggen itself does not use
+    /// this — it is exposed for clients of `bloggenKit` that need it (e.g.
+    /// to display or link to the published site).
+    public let url: String?
 }
 
 // ---------------------------------------------------------------------------
@@ -38,20 +43,23 @@ extension BlogConfig: Codable {
         case posts
         case templates
         case output
+        case url
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         posts = try container.decode(String.self, forKey: .posts)
         templates = try container.decode(Templates.self, forKey: .templates)
         output = try container.decode(String.self, forKey: .output)
+        url = try container.decodeIfPresent(String.self, forKey: .url)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(posts, forKey: .posts)
         try container.encode(templates, forKey: .templates)
         try container.encode(output, forKey: .output)
+        try container.encodeIfPresent(url, forKey: .url)
     }
 }
 
